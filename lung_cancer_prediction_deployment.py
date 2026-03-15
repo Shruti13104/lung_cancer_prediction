@@ -10,6 +10,7 @@ Original file is located at
 import streamlit as st
 import numpy as np
 import pickle
+import joblib
 
 # Load trained model
 model = joblib.load("cancer_patient_acc_lr_model.pkl")

@@ -9,34 +9,50 @@ Original file is located at
 
 import streamlit as st
 import numpy as np
-import pickle
 import joblib
 
-# Load trained model
 model = joblib.load("cancer_patient_acc_lr_model.pkl")
 
-
-st.title("Cancer Risk Prediction System")
-
-st.write("Enter patient details")
+st.title("Lung Cancer Risk Prediction System")
 
 age = st.number_input("Age")
-air_pollution = st.number_input("Air Pollution")
-smoking = st.number_input("Smoking")
-alcohol = st.number_input("Alcohol Use")
-genetic_risk = st.number_input("Genetic Risk")
-obesity = st.number_input("Obesity")
-chest_pain = st.number_input("Chest Pain")
+gender = st.number_input("Gender")
 
-features = np.array([[age,air_pollution,smoking,alcohol,genetic_risk,obesity,chest_pain]])
+air_pollution = st.number_input("Air Pollution")
+alcohol = st.number_input("Alcohol Use")
+dust_allergy = st.number_input("Dust Allergy")
+occupational_hazards = st.number_input("Occupational Hazards")
+genetic_risk = st.number_input("Genetic Risk")
+chronic_lung_disease = st.number_input("Chronic Lung Disease")
+balanced_diet = st.number_input("Balanced Diet")
+obesity = st.number_input("Obesity")
+smoking = st.number_input("Smoking")
+passive_smoker = st.number_input("Passive Smoker")
+chest_pain = st.number_input("Chest Pain")
+coughing_blood = st.number_input("Coughing of Blood")
+fatigue = st.number_input("Fatigue")
+weight_loss = st.number_input("Weight Loss")
+shortness_breath = st.number_input("Shortness of Breath")
+wheezing = st.number_input("Wheezing")
+swallowing_difficulty = st.number_input("Swallowing Difficulty")
+clubbing_fingers = st.number_input("Clubbing of Finger Nails")
+frequent_cold = st.number_input("Frequent Cold")
+dry_cough = st.number_input("Dry Cough")
+snoring = st.number_input("Snoring")
+
+features = np.array([[age, gender, air_pollution, alcohol, dust_allergy,
+occupational_hazards, genetic_risk, chronic_lung_disease, balanced_diet,
+obesity, smoking, passive_smoker, chest_pain, coughing_blood, fatigue,
+weight_loss, shortness_breath, wheezing, swallowing_difficulty,
+clubbing_fingers, frequent_cold, dry_cough, snoring]])
 
 if st.button("Predict Cancer Risk"):
-
+    
     prediction = model.predict(features)
 
-    if prediction == 0:
+    if prediction[0] == 0:
         st.success("Low Cancer Risk")
-    elif prediction == 1:
+    elif prediction[0] == 1:
         st.warning("Medium Cancer Risk")
     else:
         st.error("High Cancer Risk")
